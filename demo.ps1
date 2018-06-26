@@ -37,6 +37,8 @@ function Get-SMPSData
 $appdata = Get-SMPSData -PSDFilePath "$PSScriptRoot\appdata.psd1"
 $appdata
 
+write-host "`n`n---"
+Read-Host -Prompt "This will load data from json file now"
 
 #read json data
 try {
@@ -53,6 +55,9 @@ Write-Verbose "Provided json data in file succesfully parse to JSON format"
 #
 $jobinfo = $jsonData | Get-Member | Where-Object{$_.MemberType -like 'NoteProperty'} | Select-Object Name
 #$jobinfo
+
+write-host "`n`n---"
+Read-Host -Prompt "Proceed with parsing json data..."
 
 $jenkinJobs = @{}
 try {
@@ -74,6 +79,10 @@ catch {
     Write-Error "Error in parsing json data into powershell data format" -ErrorAction Stop
 }
 #$jenkinJobs | fl *
+
+write-host "`n`n---"
+Read-Host -Prompt "Ready to start jobs in jenkins"
+
 #
 $passkey = $appdata.JenkinsAPIToken | ConvertTo-SecureString -asPlainText -Force
 $cred = New-Object System.Management.Automation.PSCredential($appdata.UserName,$passkey)
@@ -95,4 +104,11 @@ $jenkinJobs.GetEnumerator() | ForEach-Object{
     
 }
 
+write-host "`n`n---"
+Read-Host -Prompt "`nFinished execution"
+
+#hold the window open if running from console, to view the results/verbose messages
+if($host.Name -notmatch 'ISE'){
+    Read-Host -Prompt "`n`nScript Execution completed. Press Enter to close the window.`n"
+}
 

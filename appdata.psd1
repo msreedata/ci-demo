@@ -4,7 +4,7 @@
 
         # Unique Data for each Role
         @{
-            JenkinsDataJSON = "\\dreamznas\Dump\githubLab\pro\ci-demo\data.json"
+            JenkinsDataJSON = "C:\Devstore\ci-demo\data.json"
 
             NodeName                     = 'localhost'
             PSApplicationName            = 'Jenkins Job Runner'

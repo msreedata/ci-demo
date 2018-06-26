@@ -24,7 +24,7 @@
     },
     "ci-demo": {
         "deploy": true, 
-        "notify": "ci.demoadmin@demo.com", 
+        "notify": "azdemoadmin@demo.com", 
         "project": "my new project",
         "revision": "4.2.1-rc1",
         "module": "parsing",
