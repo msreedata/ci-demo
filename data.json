@@ -1,0 +1,30 @@
+{
+    "Build_Installer": {
+        "deploy": true, 
+        "notify": "john.doe@virtamed.net", 
+        "revision": "4.2.1-rc1"
+    }, 
+    "Build_Project_A": {
+        "deploy": false, 
+        "revision": "1.2.3", 
+        "testing": "all"
+    }, 
+    "Build_Project_B": {
+        "deploy": true, 
+        "revision": "1.2.4", 
+        "testing": "unittests"
+    }, 
+    "Test_Project_A": {
+        "module": "parsing", 
+        "revision": "1.2.3"
+    }, 
+    "Test_Project_B": {
+        "module": "exporting", 
+        "revision": "1.2.4"
+    },
+    "batch-ci-stack2": {
+        "deploy": true, 
+        "notify": "raju@me.com", 
+        "revision": "4.2.1-rc1"
+    }
+}
