@@ -33,34 +33,6 @@ function Get-SMPSData
     $returndata = $op.$ConfigName
     $returndata
 }
-
-function Create-WindowsVmOnHyperV {
-    <#
-    .Synopsis
-       Create-WindowsVmOnHyperV
-    .DESCRIPTION
-       
-    .EXAMPLE
-       Create-WindowsVmOnHyperV
-    .EXAMPLE
-    #>       
-    [CmdletBinding()]
-    param (
-        # Name or IP
-        [ValidateNotNull()]
-        [string] $ComputerName                          # <=======================================  1. Set computer name
-        #Roles to install on this system
-        ,[Parameter(Mandatory=$true)]
-        [ValidateSet('Win2016')]
-        [string]$Roles
-        # Environment to which this needs to be published.
-        # ,[Parameter(Mandatory=$true)]
-        # [ValidateSet('Win2016')]
-        # [string]$Distro
-        )
-
-}
-
 #
 $appdata = Get-SMPSData -PSDFilePath "$PSScriptRoot\appdata.psd1"
 $appdata
@@ -80,7 +52,7 @@ if (-not $validJson) {
 Write-Verbose "Provided json data in file succesfully parse to JSON format"
 #
 $jobinfo = $jsonData | Get-Member | Where-Object{$_.MemberType -like 'NoteProperty'} | Select-Object Name
-$jobinfo
+#$jobinfo
 
 $jenkinJobs = @{}
 try {
@@ -101,18 +73,14 @@ try {
 catch {
     Write-Error "Error in parsing json data into powershell data format" -ErrorAction Stop
 }
-
 #$jenkinJobs | fl *
-
-
-
+#
 $passkey = $appdata.JenkinsAPIToken | ConvertTo-SecureString -asPlainText -Force
 $cred = New-Object System.Management.Automation.PSCredential($appdata.UserName,$passkey)
 $crumb = Get-JenkinsCrumb -Uri $appdata.BaseUri -Credential $cred
 #$crumb
-
-
-$jenkinJobs.GetEnumerator() | %{ 
+#
+$jenkinJobs.GetEnumerator() | ForEach-Object{ 
 
     $projectName = $_.Key 
     Write-Verbose "Processing job : $projectName"

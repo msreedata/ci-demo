@@ -22,9 +22,12 @@
         "module": "exporting", 
         "revision": "1.2.4"
     },
-    "batch-ci-stack2": {
+    "ci-demo": {
         "deploy": true, 
-        "notify": "raju@me.com", 
-        "revision": "4.2.1-rc1"
+        "notify": "ci.demoadmin@demo.com", 
+        "project": "my new project",
+        "revision": "4.2.1-rc1",
+        "module": "parsing",
+        "testing": "unittests"
     }
 }
